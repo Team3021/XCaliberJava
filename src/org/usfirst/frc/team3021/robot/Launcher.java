@@ -54,7 +54,7 @@ public class Launcher {
 		//old code  32.4 degrees
 		//NEW BOT 30.7
 		lFeedback = new AnalogPotentiometer(0, 30.7,0.0); //second number full range with base (0 degrees) at lowest point
-		puncher = new Solenoid(2); //In competition it is 2
+		puncher = new Solenoid(3); //In competition it is 2
 		spike = new Relay(0);
 		launchStopwatch = new Timer();
 	}
@@ -160,7 +160,7 @@ public class Launcher {
 
 	void Act(){
 		lAct.set(Buttons.getRawAxis(1));
-		System.out.printf("Short Shot Value: %lf\n\n" + lFeedback.get()); //Use to find angle
+		//System.out.printf("Short Shot Value: %lf\n\n" + lFeedback.get()); //Use to find angle
 		if(Buttons.getRawButton(2)){
 			launchWheel.set(LauncherSpeed());
 			if(Buttons.getRawButton(4) && lFeedback.get() != shortShot){
