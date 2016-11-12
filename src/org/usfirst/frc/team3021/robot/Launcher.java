@@ -46,17 +46,17 @@ public class Launcher {
 	Timer launchStopwatch;
 	
 	public Launcher() {
-		boolean fire=false;
+		fire = false;
 		Buttons = new Joystick(1);
-		JS= new Joystick(0);
-		CANTalon launchWheel = new CANTalon(5);
-		Talon lAct = new Talon(1);
+		JS = new Joystick(0);
+		launchWheel = new CANTalon(5);
+		lAct = new Talon(1);
 		//old code  32.4 degrees
 		//NEW BOT 30.7
-		AnalogPotentiometer lFeedback = new AnalogPotentiometer(0, 30.7,0.0); //second number full range with base (0 degrees) at lowest point
-		Solenoid puncher = new Solenoid(2); //In competition it is 2
-		Relay spike = new Relay(0);
-		Timer launchStopwatch = new Timer();
+		lFeedback = new AnalogPotentiometer(0, 30.7,0.0); //second number full range with base (0 degrees) at lowest point
+		puncher = new Solenoid(2); //In competition it is 2
+		spike = new Relay(0);
+		launchStopwatch = new Timer();
 	}
 	
 	void Auto() throws InterruptedException {

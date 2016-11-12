@@ -36,7 +36,7 @@ public class XCaliber extends IterativeRobot {
 		autoCondition = false;
 		myDrive = new Drive();
 		// TODO: To be implemented with their respective classes
-//    	myLauncher = new Launcher();
+    	myLauncher = new Launcher();
 //    	//myLifter = new Lifter();
 //    	//myCamera = new Camera();
     	myCompressor = new Compressor();
