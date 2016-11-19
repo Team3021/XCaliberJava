@@ -54,7 +54,7 @@ public class Launcher {
 		//old code  32.4 degrees
 		//NEW BOT 30.7
 		lFeedback = new AnalogPotentiometer(0, 30.7,0.0); //second number full range with base (0 degrees) at lowest point
-		puncher = new Solenoid(3); //In competition it is 2
+		puncher = new Solenoid(2); //In competition it is 2
 		spike = new Relay(0);
 		launchStopwatch = new Timer();
 	}
@@ -194,6 +194,9 @@ public class Launcher {
 	public void TeleOp() throws InterruptedException{ //CHANGE FOR COMPETITION; REVERSE POLARITY OF MOTOR VALUES SO IT SHOOTS RIGHT WAY
 
 		fire=JS.getRawButton(2);
+		if(fire==true){
+			System.out.println("Button 2 pressed on joystick!");
+		}
 
 		if(!(Buttons.getRawButton(6))){
 			Act();
@@ -220,24 +223,22 @@ public class Launcher {
 
 		}else*/
 
-		 if(fire && !Buttons.getRawButton(2)) {
-			launchWheel.set(LauncherSpeed());
-			launchStopwatch.start();
-
-			if(launchStopwatch.get() > 2){
-				puncher.set(true);
-				System.out.printf("Hey--the puncher activated!"); //Grammar check brought to you by Nathan. ;)
-
-			}
+		if(JS.getRawButton(2)) {
+			launchWheel.set(0.5);
 			Thread.sleep(1);
-		    }else if(JS.getRawButton(4)){
-
+			System.out.println("Button 2 pressed on Joystick!");
+		}else if(JS.getRawButton(3) && JS.getRawButton(4)){
+			puncher.set(true);
+			Thread.sleep(1);
+			System.out.println("Buttons 3 and 4 pressed on Joystick!");
+		}else if(JS.getRawButton(4)){
 			launchWheel.set(-0.9);
 			Thread.sleep(1);
-
+			System.out.println("Button 4 pressed on Joystick!");
 		}else if(Buttons.getRawButton(3) && Buttons.getRawButton(2)){
 			puncher.set(true);
 			Thread.sleep(1);
+			System.out.println("Buttons 2 and 3 pressed on panel!");
 		}else if(!fire && !Buttons.getRawButton(2)){
 			launchWheel.set(0);
 			Thread.sleep(1);
