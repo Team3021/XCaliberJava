@@ -145,10 +145,10 @@ public class Launcher {
 		System.out.println("Short Shot Value: " + lFeedback.get()); //Use to find angle
 		if(Buttons.getRawButton(2)){
 			launchWheel.set(LauncherSpeed());
-			if(Buttons.getRawButton(4) && lFeedback.get() != shortShot){
+			if(Buttons.getRawButton(4) && lFeedback.get() != shortShot && !Buttons.getRawButton(5)){
 				lAct.set(1.0 * (lFeedback.get() - shortShot));
 				//System.out.println("You have entered the second if=under\n\n");
-			}else if(!Buttons.getRawButton(4) && lFeedback.get() != longShot){
+			}else if(!Buttons.getRawButton(4) && lFeedback.get() != longShot && !Buttons.getRawButton(5)){
 				lAct.set(1.0 * (lFeedback.get() - longShot));
 
 			}else{
@@ -164,10 +164,10 @@ public class Launcher {
 
 	double LauncherSpeed(){
 		if(Buttons.getRawButton(1)){
-				return 1;  // .95
+				return -0.9;  // .95
 
 			}else{
-				return 0.75;
+				return -0.75;
 			}
 	}
 
@@ -209,10 +209,10 @@ public class Launcher {
 			Thread.sleep(1);
 			System.out.println("Buttons 3 and 4 pressed on Joystick!");
 		}else if(JS.getRawButton(4)){
-			launchWheel.set(-0.9);
+			launchWheel.set(LauncherSpeed());
 			Thread.sleep(1);
 			System.out.println("Button 4 pressed on Joystick!");
-		}else if(Buttons.getRawButton(3) && Buttons.getRawButton(2)){
+		}else if(Buttons.getRawButton(3) && Buttons.getRawButton(2) && !Buttons.getRawButton(6)){
 			puncher.set(true);
 			Thread.sleep(1);
 			System.out.println("Buttons 2 and 3 pressed on panel!");
