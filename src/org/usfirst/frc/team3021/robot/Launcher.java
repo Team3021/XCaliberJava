@@ -16,27 +16,10 @@ public class Launcher {
 	double  shortShot = 13.91; //"14.81 is golden" -Shivang, increase by 2 degrees
 	double longShot = 11.56;
 	double autoShot = 20;
-	CANTalon RightRear;
-	CANTalon RightFront;
-	CANTalon LeftRear;
-	CANTalon LeftFront;
 
-	Solenoid lowBar;
-	Solenoid GearShifter;
 	Joystick Buttons;
-
-	RobotDrive SpeedBase;
-	Encoder leftEnc;
-	Encoder rightEnc;
-	Timer StopWatch;
 	Joystick JS;
-	AnalogGyro navX;
-	double distance;
-	double circum;
-	boolean Shift;
-	
-	boolean fire;
-	boolean test;
+		
 	CANTalon launchWheel;
 	Talon lAct;
 	AnalogPotentiometer lFeedback;
@@ -46,7 +29,6 @@ public class Launcher {
 	Timer launchStopwatch;
 	
 	public Launcher() {
-		fire = false;
 		Buttons = new Joystick(1);
 		JS = new Joystick(0);
 		launchWheel = new CANTalon(5);
@@ -160,7 +142,7 @@ public class Launcher {
 
 	void Act(){
 		lAct.set(Buttons.getRawAxis(1));
-		//System.out.printf("Short Shot Value: %lf\n\n" + lFeedback.get()); //Use to find angle
+		System.out.println("Short Shot Value: " + lFeedback.get()); //Use to find angle
 		if(Buttons.getRawButton(2)){
 			launchWheel.set(LauncherSpeed());
 			if(Buttons.getRawButton(4) && lFeedback.get() != shortShot){
@@ -193,12 +175,7 @@ public class Launcher {
 
 	public void TeleOp() throws InterruptedException{ //CHANGE FOR COMPETITION; REVERSE POLARITY OF MOTOR VALUES SO IT SHOOTS RIGHT WAY
 
-		fire=JS.getRawButton(2);
-		if(fire==true){
-			System.out.println("Button 2 pressed on joystick!");
-		}
-
-		if(!(Buttons.getRawButton(6))){
+		if(!Buttons.getRawButton(6)){
 			Act();
 		}
 
@@ -239,7 +216,7 @@ public class Launcher {
 			puncher.set(true);
 			Thread.sleep(1);
 			System.out.println("Buttons 2 and 3 pressed on panel!");
-		}else if(!fire && !Buttons.getRawButton(2)){
+		}else if(!JS.getRawButton(2) && !Buttons.getRawButton(2)){
 			launchWheel.set(0);
 			Thread.sleep(1);
 			puncher.set(false);
