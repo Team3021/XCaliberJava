@@ -3,6 +3,7 @@ package org.usfirst.frc.team3021.robot;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -18,8 +19,9 @@ public class XCaliber extends IterativeRobot {
 	static int AutoMode;
 	static double overArching;
 	static boolean autoCondition;
-	Timer StopWatch; //TODO: Revise this command; it currently sets a null value with no initialization
-	Joystick buttons; //TODO: Revise this as well
+	Relay flashlight;
+	Timer StopWatch; //TODO: Revise this attribute; it currently sets a null value with no initialization
+	Joystick Buttons; //TODO: Revise this as well
 	Compressor myCompressor;
 	Drive myDrive;
 	Launcher myLauncher;
@@ -32,6 +34,7 @@ public class XCaliber extends IterativeRobot {
 	// Porting Complete!
 	public XCaliber() {
 		super();
+		Buttons = new Joystick(1);
 		StopWatch = new Timer();
 		autoCondition = false;
 		myDrive = new Drive();
@@ -40,6 +43,7 @@ public class XCaliber extends IterativeRobot {
 //    	//myLifter = new Lifter();
 //    	//myCamera = new Camera();
     	myCompressor = new Compressor();
+    	flashlight = new Relay(1, Relay.Direction.kForward);
 	}
 	
 	
@@ -112,9 +116,17 @@ public class XCaliber extends IterativeRobot {
      * This function is called periodically during operator control
      */
     
-    //Porting Complete--except for implementation of myLauncher, Camera and Lifter.
+    //Porting Complete--except for implementation myCamera and Lifter.
     public void teleopPeriodic() {
     	myDrive.teleOp();
+    	System.out.println(flashlight.get());
+    	// Controls the flashlight. Reads the middle switch at the top of the control panel.
+    	if(Buttons.getRawButton(7)) {
+    		flashlight.set(Relay.Value.kForward);
+    	}
+    	else {
+    		flashlight.set(Relay.Value.kOff);
+    	}
     	
     	try {
 			myLauncher.TeleOp();
