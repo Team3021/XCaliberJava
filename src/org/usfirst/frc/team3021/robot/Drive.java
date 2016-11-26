@@ -252,13 +252,16 @@ public class Drive {
 		}
 		Shift = JS.getRawButton(1);	// Shift - safety button
 		if (Shift) {
-			// Engage pneumatic shifter
+			SpeedBase.setMaxOutput(1.0);
 			GearShifter.set(true);
-			System.out.printf("shift true\n");
+			System.out.printf("Moving at high speed!");
 		}
 		else {
-			// Disengage pnuematic shifter
-			GearShifter.set(false);
+			// A spacer was missing on one side of the robot and low gear wore down. 
+			// This change was done to make it possible to drive the robot.
+			GearShifter.set(true); 
+			SpeedBase.setMaxOutput(0.5);
+
 		}
 
 	}
