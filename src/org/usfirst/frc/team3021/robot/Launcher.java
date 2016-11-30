@@ -142,7 +142,6 @@ public class Launcher {
 
 	void Act(){
 		lAct.set(Buttons.getRawAxis(1));
-		System.out.println("Short Shot Value: " + lFeedback.get()); //Use to find angle
 		if(Buttons.getRawButton(2)){
 			launchWheel.set(LauncherSpeed());
 			if(Buttons.getRawButton(4) && lFeedback.get() != shortShot && !Buttons.getRawButton(5)){

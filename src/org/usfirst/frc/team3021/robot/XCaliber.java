@@ -119,7 +119,6 @@ public class XCaliber extends IterativeRobot {
     //Porting Complete--except for implementation myCamera and Lifter.
     public void teleopPeriodic() {
     	myDrive.teleOp();
-    	System.out.println(flashlight.get());
     	// Controls the flashlight. Reads the middle switch at the top of the control panel.
     	if(Buttons.getRawButton(7)) {
     		flashlight.set(Relay.Value.kForward);

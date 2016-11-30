@@ -260,7 +260,7 @@ public class Drive {
 			// A spacer was missing on one side of the robot and low gear wore down. 
 			// This change was done to make it possible to drive the robot.
 			GearShifter.set(true); 
-			SpeedBase.setMaxOutput(0.5);
+			SpeedBase.setMaxOutput(0.6);
 
 		}
 
