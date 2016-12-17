@@ -26,10 +26,8 @@ public class XCaliber extends IterativeRobot {
 	Drive myDrive;
 	Launcher myLauncher;
 	// TODO: To be implemented with their respective classes
-	/**
-	Lifter myLifter;
+	// Lifter myLifter;
 	Camera myCamera;
-	*/
 	
 	// Porting Complete!
 	public XCaliber() {
@@ -41,7 +39,7 @@ public class XCaliber extends IterativeRobot {
 		// TODO: To be implemented with their respective classes
     	myLauncher = new Launcher();
 //    	//myLifter = new Lifter();
-//    	//myCamera = new Camera();
+    	myCamera = new Camera();
     	myCompressor = new Compressor();
     	flashlight = new Relay(1, Relay.Direction.kForward);
 	}
@@ -119,7 +117,6 @@ public class XCaliber extends IterativeRobot {
     //Porting Complete--except for implementation myCamera and Lifter.
     public void teleopPeriodic() {
     	myDrive.teleOp();
-    	System.out.println(flashlight.get());
     	// Controls the flashlight. Reads the middle switch at the top of the control panel.
     	if(Buttons.getRawButton(7)) {
     		flashlight.set(Relay.Value.kForward);
@@ -135,8 +132,8 @@ public class XCaliber extends IterativeRobot {
 			e.printStackTrace();
 		}
     	// Not yet implemented; TODO: Implement Launcher and Camera
-    	//myCamera.teleOp(); // Not used in C++ code.
-    	//myLifter.teleOp(); // Not used in C++ code.
+    	myCamera.TeleOp(); // Not used in C++ code.
+    	//myLifter.TeleOp(); // Not used in C++ code.
     }
     
     /**
