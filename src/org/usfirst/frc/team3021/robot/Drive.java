@@ -26,16 +26,15 @@ public class Drive {
 	private Encoder leftEnc;
 	private Encoder rightEnc;
 	private Timer StopWatch;
-	private Joystick JS;
+	private ThrustMasterController JS;
 	private AnalogGyro navX;
 	private double distance;
 	private double circum;
-	private boolean Shift;
 	
 	//TODO: Please refer to the C++ code about Wait/Thread.sleep method calls. Some calls use a value less than one millisecond.
 	
 	public Drive(){
-		JS = new Joystick(0);
+		JS = new ThrustMasterController(0);
 		Buttons = new Joystick(1);
 
 		lowBar = new Solenoid(1);
@@ -59,7 +58,6 @@ public class Drive {
 	    StopWatch = new Timer();
 
 	    distance=0;
-	    Shift = false;
 	    rightEnc = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
 	    leftEnc = new Encoder(2, 3, false, Encoder.EncodingType.k4X);
 	    //rightEnc->SetMaxPeriod(0.1);
@@ -244,17 +242,13 @@ public class Drive {
 	}
 
 	public void teleOp(){
-		SpeedBase.arcadeDrive(JS, true);
-		try {
-			Thread.sleep(3);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		Shift = JS.getRawButton(1);	// Shift - safety button
+		SpeedBase.arcadeDrive(JS.getMoveValue(), JS.getTurnValue(), true);
+		
+		boolean Shift = JS.isHighGear();	// Shift - safety button
+		
 		if (Shift) {
 			// Engage pneumatic shifter
 			GearShifter.set(true);
-			System.out.printf("shift true\n");
 		}
 		else {
 			// Disengage pnuematic shifter
