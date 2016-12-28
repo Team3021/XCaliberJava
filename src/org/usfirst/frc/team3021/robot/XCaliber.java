@@ -126,7 +126,7 @@ public class XCaliber extends IterativeRobot {
     	}
     	
     	try {
-			myLauncher.TeleOp();
+			myLauncher.teleOp();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
