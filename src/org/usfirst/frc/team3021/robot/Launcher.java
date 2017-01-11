@@ -8,7 +8,9 @@ import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Timer;
 
 public class Launcher {
+	private static final double MAX_POTENTIOMETER_VALUE = 30.7;
 	//Member Attributes
+	
 	double  shortShot = 13.91; //"14.81 is golden" -Shivang, increase by 2 degrees
 	double longShot = 11.56;
 	double autoShot = 20;
@@ -114,16 +116,28 @@ public class Launcher {
 		if(Buttons.isSpinnerForward()){
 			
 			if(Buttons.isShortShot() && lFeedback.get() != shortShot && Buttons.isAutomaticAiming()){
-				lAct.set(1.0 * (lFeedback.get() - shortShot));
+				lAct.set(0.5 * (lFeedback.get() - shortShot) / MAX_POTENTIOMETER_VALUE);
 			
-			}else if(!Buttons.isShortShot() && lFeedback.get() != longShot && Buttons.isAutomaticAiming()){
-				lAct.set(1.0 * (lFeedback.get() - longShot));
-
+			}
+			else if(!Buttons.isShortShot() && lFeedback.get() != longShot && Buttons.isAutomaticAiming()){
+				lAct.set(0.5 * (lFeedback.get() - longShot) / MAX_POTENTIOMETER_VALUE);
+			}
+			else {
+				lAct.set(0);
 			}
 
 		}
-
-
+		// DEBUGGING CODE; remove when purpose is fulfilled
+		System.out.println("Talon status: " + lAct.get());
+		System.out.println("Current potentiometer value: " + lFeedback.get());
+		if (lFeedback.get() == shortShot) {
+			System.out.println("Potentiometer equals short shot!");
+		}
+		else if (lFeedback.get() == longShot) {
+			System.out.println("Potentiometer equals long shot!");
+		}
+		System.out.println();
+		
 	}
 
 	
