@@ -11,9 +11,9 @@ public class Launcher {
 	private static final double MAX_POTENTIOMETER_VALUE = 30.7;
 	//Member Attributes
 	
-	double  shortShot = 13.91; //"14.81 is golden" -Shivang, increase by 2 degrees
-	double longShot = 11.56;
-	double autoShot = 20;
+	private static final double  SHORT_SHOT = 13.91; //"14.81 is golden" -Shivang, increase by 2 degrees
+	private static final double LONG_SHOT = 11.56;
+	private static final double AUTO_SHOT = 20;
 
 	XinMoController Buttons;
 	ThrustMasterController JS;
@@ -44,7 +44,7 @@ public class Launcher {
 		switch(XCaliber.AutoMode){
 		case 2:
 			if(XCaliber.overArching < 4){
-				lAct.set(1.0 * (lFeedback.get() - autoShot));
+				lAct.set(1.0 * (lFeedback.get() - AUTO_SHOT));
 				Thread.sleep(1);
 
 			}
@@ -115,12 +115,12 @@ public class Launcher {
 		
 		if(Buttons.isSpinnerForward()){
 			
-			if(Buttons.isShortShot() && lFeedback.get() != shortShot && Buttons.isAutomaticAiming()){
-				lAct.set(0.5 * (lFeedback.get() - shortShot) / MAX_POTENTIOMETER_VALUE);
+			if(Buttons.isShortShot() && lFeedback.get() != SHORT_SHOT && Buttons.isAutomaticAiming()){
+				lAct.set(0.5 * (lFeedback.get() - SHORT_SHOT) / MAX_POTENTIOMETER_VALUE);
 			
 			}
-			else if(!Buttons.isShortShot() && lFeedback.get() != longShot && Buttons.isAutomaticAiming()){
-				lAct.set(0.5 * (lFeedback.get() - longShot) / MAX_POTENTIOMETER_VALUE);
+			else if(!Buttons.isShortShot() && lFeedback.get() != LONG_SHOT && Buttons.isAutomaticAiming()){
+				lAct.set(0.5 * (lFeedback.get() - LONG_SHOT) / MAX_POTENTIOMETER_VALUE);
 			}
 			else {
 				lAct.set(0);
@@ -130,10 +130,10 @@ public class Launcher {
 		// DEBUGGING CODE; remove when purpose is fulfilled
 		System.out.println("Talon status: " + lAct.get());
 		System.out.println("Current potentiometer value: " + lFeedback.get());
-		if (lFeedback.get() == shortShot) {
+		if (lFeedback.get() == SHORT_SHOT) {
 			System.out.println("Potentiometer equals short shot!");
 		}
-		else if (lFeedback.get() == longShot) {
+		else if (lFeedback.get() == LONG_SHOT) {
 			System.out.println("Potentiometer equals long shot!");
 		}
 		System.out.println();
