@@ -1,7 +1,8 @@
 package org.usfirst.frc.team3021.robot;
 
+import com.ctre.CANTalon;
+
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
-import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;

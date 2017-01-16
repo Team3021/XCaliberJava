@@ -3,8 +3,8 @@ package org.usfirst.frc.team3021.robot;
 import com.ni.vision.NIVision;
 import com.ni.vision.NIVision.Image;
 
-import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.vision.CameraServer;
 
 public class Camera {
 	//Member Attributes
