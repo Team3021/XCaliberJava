@@ -18,9 +18,7 @@ public class Drive {
 	private CANTalon LeftRear;
 	private CANTalon LeftFront;
 
-	private Solenoid lowBar;
 	private Solenoid GearShifter;
-	private Joystick Buttons;
 
 	private RobotDrive SpeedBase;
 	private Encoder leftEnc;
@@ -35,9 +33,7 @@ public class Drive {
 	
 	public Drive(){
 		JS = new ThrustMasterController(0);
-		Buttons = new Joystick(1);
 
-		lowBar = new Solenoid(1);
 		LeftFront = new CANTalon(2);
 		LeftRear = new CANTalon(4);
 		RightFront = new CANTalon(1);
@@ -79,10 +75,6 @@ public class Drive {
 	public void auto() {
 		switch(XCaliber.AutoMode){
 		case 1:
-			//while(abs(rightEnc->Get()) <= 256){
-			//rightEnc->Reset();
-			//printf("OVERARCHING: %f\n\n", overArching);
-			//SpeedBase->SetLeftRightMotorOutputs(0.3,0.3);
 			if(XCaliber.overArching < 5.0){
 				LeftFront.set(-0.75);
 				LeftRear.set(-0.75);
@@ -94,57 +86,8 @@ public class Drive {
 				LeftRear.set(0);
 				RightFront.set(0);
 				RightRear.set(0);
-				//AutoCondition=true;
 			}
-			//using CANTalons allowed for aspeed control signature allowing me to use Set() still with Cantalons
-			//Huh? --N ^
-			//SpeedBase->SetLeftRightMotorOutputs(0.8,0.85);
-			//distance = rightEnc -> Count();
-			//printf("distance: %f\n", rightEnc->Get());
-
-			//}
-			//SpeedBase->SetLeftRightMotorOutputs(0,0);
-			//Wait(100);
-
 			break;
-			/*	case 2:
-				if(overArching < 5){
-				AutoCondition= true;
-				LeftFront.set(0.0);
-				LeftRear.set(0.0);
-				RightFront.set(0.0);
-				RightRear.set(0.0);
-				Wait(1);
-			}else if(overArching >= 5 && overArching <9){
-				AutoCondition=false;
-				LeftFront.set(0.8);
-				LeftRear.set(0.8);
-				RightFront.set(-0.2);
-				RightRear.set(-0.2);
-				Wait(0.1);
-				AutoCondition=true;
-			}
-			else if(overArching >= 9 && overArching <= 11){
-				LeftFront.set(0.71);
-				LeftRear.set(0.71);
-				RightFront.set(-0.71);
-				RightRear.set(-0.71);
-				try {
-					Thread.sleep(1);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				AutoCondition=false;
-			}
-			else {
-				LeftFront->Set(0);
-				LeftRear->Set(0);
-				RightFront->Set(0);
-				RightRear->Set(0);
-				Wait(0.0001);
-			}
-			break;*/
 		case 3:
 			if(XCaliber.overArching < 3.0) {
 				LeftFront.set(1.0);
@@ -221,24 +164,6 @@ public class Drive {
 			System.out.printf("No Autonomous Chosen");
 			break;
 		}
-	}
-	
-	/*public void AutoPeriodic(){
-		System.out.printf("%i\n", rightEnc->GetRaw());
-		if(abs(rightEnc.getRaw()) > 256) {
-			//SpeedBase.setLeftRightMotorOutputs(0,0);
-			LeftFront.set(0);
-			LeftRear.set(0);
-			RightFront.set(0);
-			RightRear.set(0);
-		}
-	}*/
-	
-	public void obstacleOne(){
-		if(Buttons.getRawButton(4)){
-			lowBar.set(true);
-		}
-
 	}
 
 	public void teleOp(){
