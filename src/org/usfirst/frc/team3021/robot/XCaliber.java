@@ -39,7 +39,7 @@ public class XCaliber extends IterativeRobot {
 		// TODO: To be implemented with their respective classes
     	myLauncher = new Launcher();
 //    	//myLifter = new Lifter();
-    	myCamera = new Camera();
+    	//myCamera = new Camera();
     	myCompressor = new Compressor();
     	flashlight = new Relay(1, Relay.Direction.kForward);
 	}
@@ -132,7 +132,7 @@ public class XCaliber extends IterativeRobot {
 			e.printStackTrace();
 		}
     	// Not yet implemented; TODO: Implement Launcher and Camera
-    	myCamera.TeleOp(); // Not used in C++ code.
+    	//myCamera.TeleOp(); // Not used in C++ code.
     	//myLifter.TeleOp(); // Not used in C++ code.
     }
     
